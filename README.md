@@ -1,20 +1,18 @@
-# pandas
+# pandas_complete
 
-This repository contains a comprehensive journey through the complete `pandas` library, covering all fundamental and advanced features. It includes two major projects:
+This repository offers a complete journey through the `pandas` library, featuring both foundational and advanced techniques. It is organized around two main projects for real-world practice:
 
-1. **Anime Feature Extraction Project:**  
-   Demonstrates feature extraction techniques using an anime dataset.
-2. **Countries Data Insights Project:**  
-   Provides insightful analysis and visualizations on a dataset of countries.
+1. **Anime Feature Extraction Project**  
+   Learn to extract, engineer, and preprocess features from an anime dataset using only pandas.
 
-Both projects are implemented in Python using the `pandas` library, and serve as practical examples for mastering data manipulation and analysis.
+2. **Countries Data Insights Project**  
+   Gain insights and perform data analysis on country statistics, using pandas for all data manipulation and summaries.
 
 ---
 
 ## Table of Contents
 
 - [About](#about)
-- [Features](#features)
 - [Projects](#projects)
   - [Anime Feature Extraction](#anime-feature-extraction)
   - [Countries Data Insights](#countries-data-insights)
@@ -28,24 +26,16 @@ Both projects are implemented in Python using the `pandas` library, and serve as
 
 ## About
 
-This repository aims to provide a beginner-to-advanced walkthrough of the `pandas` library. By working through the code and projects here, you will learn:
+This repository provides a comprehensive path through the pandas library, focusing on:
 
-- Data manipulation and cleaning
-- Feature engineering
+- Data loading, cleaning, and preparation
+- Feature engineering and extraction
 - Exploratory data analysis (EDA)
-- Data aggregation, grouping, and pivoting
-- Handling missing values
-- Merging and joining datasets
-- Visualization with pandas and matplotlib
+- Aggregation, grouping, and pivoting
+- Handling missing values and outliers
+- Merging, joining, and reshaping data
 
----
-
-## Features
-
-- **Complete pandas tutorials and notebooks**
-- **Real-world projects for hands-on practice**
-- **Well-commented code for easy understanding**
-- **Best practices for data preprocessing and analysis**
+All code and projects use **only pandas** for operations and visualizations (e.g., pandas’ built-in plotting functions).
 
 ---
 
@@ -53,77 +43,73 @@ This repository aims to provide a beginner-to-advanced walkthrough of the `panda
 
 ### Anime Feature Extraction
 
-- **Objective:** Extract features from an anime dataset to prepare for machine learning or statistical analysis.
-- **Key Steps:**
+- **Goal:** Extract and engineer features from an anime dataset.
+- **Techniques Used:**
   - Data cleaning and preprocessing
-  - Handling categorical and numerical features
-  - Creating new features (feature engineering)
-  - Exploratory data analysis
+  - Parsing and handling categorical/numeric data
+  - Creating new feature columns
+  - Data exploration
 
-#### Example Code Snippet
+#### Example Code
 
 ```python
 import pandas as pd
 
-# Load the anime dataset
+# Load anime dataset
 df = pd.read_csv('anime.csv')
 
-# Basic cleaning
-df.dropna(subset=['genre'], inplace=True)
-df['genre'] = df['genre'].str.split(',')
+# Clean: Drop rows with missing genres
+df = df.dropna(subset=['genre'])
 
-# Feature engineering: Count number of genres
-df['num_genres'] = df['genre'].apply(len)
+# Feature: Split genres into lists
+df['genre_list'] = df['genre'].str.split(',')
 
-# Display top 5
-print(df.head())
+# Feature: Count genres
+df['genre_count'] = df['genre_list'].apply(len)
+
+# Simple EDA with pandas plotting
+df['genre_count'].value_counts().sort_index().plot.bar()
 ```
 
 ---
 
 ### Countries Data Insights
 
-- **Objective:** Gain insights from a dataset containing information about countries.
-- **Key Steps:**
-  - Data aggregation and grouping (e.g., by continent)
+- **Goal:** Analyze and summarize country data (e.g., population, GDP, region).
+- **Techniques Used:**
+  - Grouping and aggregation (e.g., by continent)
   - Statistical summaries (mean, median, etc.)
-  - Visualizations (bar charts, histograms, etc.)
-  - Finding correlations and trends
+  - Insights with pandas' plotting
 
-#### Example Code Snippet
+#### Example Code
 
 ```python
 import pandas as pd
 
-# Load the countries dataset
+# Load countries data
 df = pd.read_csv('countries.csv')
 
 # Group by continent and calculate average population
-continent_pop = df.groupby('continent')['population'].mean().sort_values(ascending=False)
+continent_pop = df.groupby('continent')['population'].mean()
 
-print("Average population by continent:")
 print(continent_pop)
 
-# Visualization example
-import matplotlib.pyplot as plt
-
-continent_pop.plot(kind='bar', title='Average Population by Continent')
-plt.ylabel('Population')
-plt.show()
+# Visualize directly with pandas
+continent_pop.plot.bar(title='Average Population by Continent')
 ```
 
 ---
 
 ## Installation
 
-1. Clone the repository:
+1. Clone this repository:
    ```bash
    git clone https://github.com/Bhawneet1/pandas_complete.git
    cd pandas_complete
    ```
-2. (Optional) Create and activate a virtual environment.
+2. (Optional) Set up a virtual environment.
 
-3. Install dependencies:
+3. Install requirements:
    ```bash
    pip install -r requirements.txt
    ```
@@ -132,9 +118,9 @@ plt.show()
 
 ## Usage
 
-- Explore the notebooks or scripts in the repository.
-- Run the code for each project or tutorial to follow along and modify as needed.
-- Use your own datasets to practice.
+- Browse the code and notebooks in this repository.
+- Run and modify the code to learn and experiment with pandas features.
+- Use your own datasets for practice.
 
 ---
 
@@ -142,12 +128,10 @@ plt.show()
 
 - Python 3.7+
 - pandas
-- matplotlib
-- (Optional) jupyter
 
-Install requirements:
+Install requirements with:
 ```bash
-pip install pandas matplotlib jupyter
+pip install pandas
 ```
 
 ---
